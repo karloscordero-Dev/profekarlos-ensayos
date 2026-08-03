@@ -4,8 +4,8 @@ import tablaDemre from '../data/tablaDemre.json';
 
 const STORAGE_KEY = 'profekarlos_intentos_ensayos';
 
-// Admin access PIN
-export const ADMIN_PIN = 'Kapacord#2026';
+// Admin access PIN (configurable desde variables de entorno)
+export const ADMIN_PIN = import.meta.env.VITE_ADMIN_PIN || 'Kapacord#2026';
 
 /**
  * Califica un ensayo completo del estudiante
