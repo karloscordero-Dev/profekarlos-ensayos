@@ -29,7 +29,7 @@ export default function PortalInicio() {
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 mb-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest">Plataforma Oficial</span>
+            <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest">Plataforma</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">
             Portal de Ensayos PAES
