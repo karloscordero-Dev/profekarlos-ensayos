@@ -32,7 +32,7 @@ export default function PortalInicio() {
             <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest">Plataforma</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">
-            Portal de Ensayos PAES
+            Ensayos PAES
           </h1>
           <p className="text-slate-400 text-lg">
             Rinde tus evaluaciones de Competencia Lectora, obtén tu puntaje inmediatamente y revisa tu desempeño por habilidades.
