@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, Users, Award, AlertTriangle, Search, Eye, ArrowLeft, RefreshCw, CheckCircle, XCircle, Trash2 } from 'lucide-react';
+import { Lock, Users, Award, AlertTriangle, Search, Eye, ArrowLeft, RefreshCw, Trash2 } from 'lucide-react';
 import { ADMIN_PIN, obtenerTodosLosIntentos, eliminarIntento } from '../lib/ensayoService';
 import ReporteResultado from './ReporteResultado';
 

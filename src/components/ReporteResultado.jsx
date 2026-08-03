@@ -24,13 +24,6 @@ export default function ReporteResultado({ intento, onReiniciar, onVolver }) {
     return true;
   });
 
-  const getPuntajeColor = (pts) => {
-    if (pts >= 800) return 'from-emerald-500 to-teal-400 text-emerald-400 border-emerald-500/30';
-    if (pts >= 650) return 'from-blue-500 to-cyan-400 text-blue-400 border-blue-500/30';
-    if (pts >= 500) return 'from-amber-500 to-yellow-400 text-amber-400 border-amber-500/30';
-    return 'from-rose-500 to-red-400 text-rose-400 border-rose-500/30';
-  };
-
   const getPuntajeMensaje = (pts) => {
     if (pts >= 850) return '¡Nivel Sobresaliente! Estás en rango de puntaje nacional en Competencia Lectora.';
     if (pts >= 750) return '¡Excelente desempeño! Tienes un dominio sólido de las habilidades PAES.';

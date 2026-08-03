@@ -14,7 +14,6 @@ export function calificarEnsayo({ nombre, apellido, email, respuestas }) {
   let correctasValidas = 0;
   let incorrectasValidas = 0;
   let omitidasValidas = 0;
-  let pilotoRespondidas = 0;
 
   const desglosePreguntas = [];
 
@@ -29,9 +28,7 @@ export function calificarEnsayo({ nombre, apellido, email, respuestas }) {
     const opcionElegida = respuestas[qNum] || null; // 'A', 'B', 'C', 'D' o null
     const esCorrecta = !p.es_piloto && opcionElegida === p.clave;
 
-    if (p.es_piloto) {
-      if (opcionElegida) pilotoRespondidas++;
-    } else {
+    if (!p.es_piloto) {
       // Habilidad tracking
       const hab = p.habilidad || 'Interpretar';
       if (!habilidadesStats[hab]) {

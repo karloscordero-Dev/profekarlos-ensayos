@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, CheckCircle2, User, Mail, AlertCircle, ArrowLeft, Send, RotateCcw } from 'lucide-react';
+import { FileText, User, Mail, AlertCircle, ArrowLeft, Send } from 'lucide-react';
 import ensayoData from '../data/ensayoDiagnostico2026.json';
 
 export default function HojaRespuestas({ onFinalizar, onVolver }) {
@@ -32,14 +32,6 @@ export default function HojaRespuestas({ onFinalizar, onVolver }) {
       } else {
         copy[numeroPregunta] = opcion;
       }
-      return copy;
-    });
-  };
-
-  const handleOmitir = (numeroPregunta) => {
-    setRespuestas((prev) => {
-      const copy = { ...prev };
-      delete copy[numeroPregunta];
       return copy;
     });
   };
