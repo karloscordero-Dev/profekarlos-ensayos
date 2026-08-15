@@ -92,26 +92,7 @@ export default function PortalInicio() {
             </div>
           </div>
 
-          {/* Tarjeta Ensayo Próximo (Disabled) */}
-          <div className="bg-[#0c0f17]/40 border border-[#161b29] rounded-2xl p-6 flex flex-col justify-between opacity-50 grayscale cursor-not-allowed">
-            <div className="space-y-4">
-              <div className="w-12 h-12 bg-[#121622] text-slate-500 rounded-xl flex items-center justify-center border border-[#1c2233]">
-                <BookOpen className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="text-xs font-bold text-slate-500 mb-1 font-mono">PRÓXIMAMENTE</div>
-                <h3 className="text-xl font-bold text-white mb-2">Ensayo Global Forma 1</h3>
-                <p className="text-sm text-slate-400">
-                  Ensayo de control general. Disponible a mitad de semestre.
-                </p>
-              </div>
-            </div>
-            <div className="pt-6 mt-6 border-t border-[#161b29]">
-              <button disabled className="w-full bg-[#121622] text-slate-500 font-bold py-3 rounded-xl cursor-not-allowed">
-                No Disponible
-              </button>
-            </div>
-          </div>
+
 
         </div>
       </main>

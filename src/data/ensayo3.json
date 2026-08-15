@@ -36,7 +36,7 @@
     },
     {
       "numero": 6,
-      "clave": "A",
+      "clave": "B",
       "habilidad": "Evaluar",
       "es_piloto": false
     },
@@ -72,7 +72,7 @@
     },
     {
       "numero": 12,
-      "clave": "C",
+      "clave": "A",
       "habilidad": "Evaluar",
       "es_piloto": false
     },
@@ -120,7 +120,7 @@
     },
     {
       "numero": 20,
-      "clave": "B",
+      "clave": "A",
       "habilidad": "Evaluar",
       "es_piloto": false
     },
@@ -204,7 +204,7 @@
     },
     {
       "numero": 34,
-      "clave": "A",
+      "clave": "B",
       "habilidad": "Evaluar",
       "es_piloto": false
     },
@@ -234,7 +234,7 @@
     },
     {
       "numero": 39,
-      "clave": "D",
+      "clave": "A",
       "habilidad": "Evaluar",
       "es_piloto": false
     },

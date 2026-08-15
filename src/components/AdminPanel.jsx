@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, Users, Award, AlertTriangle, Search, Eye, ArrowLeft, RefreshCw, Trash2 } from 'lucide-react';
+import { Lock, Users, Award, AlertTriangle, Search, Eye, ArrowLeft, RefreshCw, Trash2, BookOpen } from 'lucide-react';
 import { ADMIN_PIN, obtenerTodosLosIntentos, eliminarIntento } from '../lib/ensayoService';
 import ReporteResultado from './ReporteResultado';
 
@@ -251,55 +251,71 @@ export default function AdminPanel({ onVolver }) {
               <p className="text-slate-500">Los resultados aparecerán aquí tan pronto los alumnos completen la hoja de respuestas.</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="border-b border-[#1e2538] text-slate-400 uppercase tracking-wider text-[11px]">
-                    <th className="py-3 px-4 font-semibold">Estudiante</th>
-                    <th className="py-3 px-4 font-semibold">Correo</th>
-                    <th className="py-3 px-4 font-semibold">Fecha</th>
-                    <th className="py-3 px-4 font-semibold">Buenas (de 60)</th>
-                    <th className="py-3 px-4 font-semibold">Puntaje PAES</th>
-                    <th className="py-3 px-4 font-semibold text-right">Acción</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#1e2538]">
-                  {intentosFiltrados.map((item) => (
-                    <tr key={item.id} className="hover:bg-[#151926]/70 transition-colors">
-                      <td className="py-3.5 px-4 font-semibold text-white">
-                        {item.nombreEstudiante}
-                      </td>
-                      <td className="py-3.5 px-4 text-slate-300 font-mono">
-                        {item.emailEstudiante}
-                      </td>
-                      <td className="py-3.5 px-4 text-slate-400">
-                        {new Date(item.fecha).toLocaleDateString('es-CL')}
-                      </td>
-                      <td className="py-3.5 px-4 text-emerald-400 font-mono font-bold">
-                        {item.correctas} / 60
-                      </td>
-                      <td className="py-3.5 px-4 font-mono font-bold text-white text-sm">
-                        {item.puntajePaes} pts
-                      </td>
-                      <td className="py-3.5 px-4 text-right space-x-2">
-                        <button
-                          onClick={() => setIntentoSeleccionado(item)}
-                          className="inline-flex items-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-semibold px-3 py-1.5 rounded-lg border border-emerald-500/30 transition-colors"
-                        >
-                          <Eye className="w-3.5 h-3.5" /> Ver Detalle
-                        </button>
-                        <button
-                          onClick={() => handleEliminar(item.id)}
-                          className="inline-flex items-center justify-center bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-semibold px-2 py-1.5 rounded-lg border border-rose-500/30 transition-colors"
-                          title="Eliminar registro"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="space-y-8">
+              {Object.entries(
+                intentosFiltrados.reduce((acc, intento) => {
+                  const titulo = intento.ensayoTitulo || 'Ensayo Sin Título';
+                  if (!acc[titulo]) acc[titulo] = [];
+                  acc[titulo].push(intento);
+                  return acc;
+                }, {})
+              ).map(([tituloEnsayo, intentos]) => (
+                <div key={tituloEnsayo} className="space-y-3">
+                  <h3 className="text-sm font-bold text-emerald-400 flex items-center gap-2 border-b border-[#1e2538] pb-2">
+                    <BookOpen className="w-4 h-4" /> {tituloEnsayo} <span className="text-slate-500 font-mono text-xs">({intentos.length} rendidos)</span>
+                  </h3>
+                  <div className="overflow-x-auto bg-[#0c0f17] border border-[#1a1f2e] rounded-xl">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="border-b border-[#1e2538] text-slate-400 uppercase tracking-wider text-[11px] bg-[#121622]">
+                          <th className="py-3 px-4 font-semibold">Estudiante</th>
+                          <th className="py-3 px-4 font-semibold">Correo</th>
+                          <th className="py-3 px-4 font-semibold">Fecha</th>
+                          <th className="py-3 px-4 font-semibold">Buenas (de 60)</th>
+                          <th className="py-3 px-4 font-semibold">Puntaje PAES</th>
+                          <th className="py-3 px-4 font-semibold text-right">Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#1e2538]">
+                        {intentos.map((item) => (
+                          <tr key={item.id} className="hover:bg-[#151926] transition-colors">
+                            <td className="py-3 px-4 font-semibold text-white">
+                              {item.nombreEstudiante}
+                            </td>
+                            <td className="py-3 px-4 text-slate-300 font-mono">
+                              {item.emailEstudiante}
+                            </td>
+                            <td className="py-3 px-4 text-slate-400">
+                              {new Date(item.fecha).toLocaleDateString('es-CL')}
+                            </td>
+                            <td className="py-3 px-4 text-emerald-400 font-mono font-bold">
+                              {item.correctas} / 60
+                            </td>
+                            <td className="py-3 px-4 font-mono font-bold text-white text-sm">
+                              {item.puntajePaes} pts
+                            </td>
+                            <td className="py-3 px-4 text-right space-x-2">
+                              <button
+                                onClick={() => setIntentoSeleccionado(item)}
+                                className="inline-flex items-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-semibold px-3 py-1.5 rounded-lg border border-emerald-500/30 transition-colors"
+                              >
+                                <Eye className="w-3.5 h-3.5" /> Ver Detalle
+                              </button>
+                              <button
+                                onClick={() => handleEliminar(item.id)}
+                                className="inline-flex items-center justify-center bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-semibold px-2 py-1.5 rounded-lg border border-rose-500/30 transition-colors"
+                                title="Eliminar registro"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
