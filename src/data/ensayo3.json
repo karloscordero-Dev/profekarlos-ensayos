@@ -7,7 +7,7 @@
     {
       "numero": 1,
       "clave": "B",
-      "habilidad": "Evaluar",
+      "habilidad": "Interpretar Sintetizar",
       "es_piloto": false
     },
     {
@@ -37,7 +37,7 @@
     {
       "numero": 6,
       "clave": "B",
-      "habilidad": "Evaluar",
+      "habilidad": "Interpretar Sintetizar",
       "es_piloto": false
     },
     {
@@ -73,7 +73,7 @@
     {
       "numero": 12,
       "clave": "A",
-      "habilidad": "Evaluar",
+      "habilidad": "Interpretar",
       "es_piloto": false
     },
     {
@@ -121,7 +121,7 @@
     {
       "numero": 20,
       "clave": "A",
-      "habilidad": "Evaluar",
+      "habilidad": "Interpretar",
       "es_piloto": false
     },
     {
@@ -205,7 +205,7 @@
     {
       "numero": 34,
       "clave": "B",
-      "habilidad": "Evaluar",
+      "habilidad": "Interpretar Sintetizar",
       "es_piloto": false
     },
     {
@@ -235,7 +235,7 @@
     {
       "numero": 39,
       "clave": "A",
-      "habilidad": "Evaluar",
+      "habilidad": "Interpretar Sintetizar",
       "es_piloto": false
     },
     {
