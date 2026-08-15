@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import PortalInicio from './pages/PortalInicio';
 import HojaRespuestas from './components/HojaRespuestas';
 import ReporteResultado from './components/ReporteResultado';
@@ -10,9 +10,12 @@ import { calificarEnsayo } from './lib/ensayoService';
 function EnsayoFlujo() {
   const [ultimoIntento, setUltimoIntento] = useState(null);
   const navigate = useNavigate();
+  const { ensayoId } = useParams();
 
   const handleFinalizar = (datosAlumno) => {
-    const intento = calificarEnsayo(datosAlumno);
+    // Pasar ensayoId que viene de la URL (diagnostico o ensayo_3)
+    const id = ensayoId === 'diagnostico' ? 'ensayo_diagnostico_2026' : ensayoId;
+    const intento = calificarEnsayo({ ...datosAlumno, ensayoId: id });
     setUltimoIntento(intento);
   };
 
@@ -26,8 +29,12 @@ function EnsayoFlujo() {
     );
   }
 
+  // Mapeo simple para obtener el id real o fallback
+  const idReal = ensayoId === 'diagnostico' ? 'ensayo_diagnostico_2026' : ensayoId;
+
   return (
     <HojaRespuestas 
+      ensayoId={idReal}
       onFinalizar={handleFinalizar} 
       onVolver={() => navigate('/')} 
     />
@@ -45,7 +52,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PortalInicio />} />
-        <Route path="/ensayo/diagnostico" element={<EnsayoFlujo />} />
+        <Route path="/ensayo/:ensayoId" element={<EnsayoFlujo />} />
         <Route path="/admin" element={<AdminFlujo />} />
       </Routes>
     </BrowserRouter>

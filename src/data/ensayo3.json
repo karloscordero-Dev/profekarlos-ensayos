@@ -1,0 +1,398 @@
+{
+  "id": "ensayo_3",
+  "titulo": "Ensayo 3 (2026)",
+  "total_preguntas": 65,
+  "preguntas_piloto_count": 5,
+  "preguntas": [
+    {
+      "numero": 1,
+      "clave": "B",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 2,
+      "clave": "C",
+      "habilidad": "Interpretar Inferir",
+      "es_piloto": false
+    },
+    {
+      "numero": 3,
+      "clave": "A",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 4,
+      "clave": "D",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 5,
+      "clave": "B",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 6,
+      "clave": "A",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 7,
+      "clave": "D",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 8,
+      "clave": "A",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 9,
+      "clave": "B",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 10,
+      "clave": "B",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 11,
+      "clave": "C",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 12,
+      "clave": "C",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 13,
+      "clave": "D",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 14,
+      "clave": "A",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 15,
+      "clave": "B",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 16,
+      "clave": "A",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 17,
+      "clave": "D",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 18,
+      "clave": "B",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 19,
+      "clave": "A",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 20,
+      "clave": "B",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 21,
+      "clave": "A",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 22,
+      "clave": "C",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 23,
+      "clave": "D",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 24,
+      "clave": "C",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": true
+    },
+    {
+      "numero": 25,
+      "clave": "A",
+      "habilidad": "Interpretar",
+      "es_piloto": false
+    },
+    {
+      "numero": 26,
+      "clave": "B",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 27,
+      "clave": "B",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 28,
+      "clave": "A",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 29,
+      "clave": "B",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 30,
+      "clave": "D",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 31,
+      "clave": "C",
+      "habilidad": "Interpretar Inferir",
+      "es_piloto": false
+    },
+    {
+      "numero": 32,
+      "clave": "B",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 33,
+      "clave": "C",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 34,
+      "clave": "A",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 35,
+      "clave": "A",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 36,
+      "clave": "B",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 37,
+      "clave": "C",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 38,
+      "clave": "A",
+      "habilidad": "Interpretar Inferir",
+      "es_piloto": false
+    },
+    {
+      "numero": 39,
+      "clave": "D",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 40,
+      "clave": "A",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 41,
+      "clave": "B",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 42,
+      "clave": "D",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 43,
+      "clave": "A",
+      "habilidad": "Interpretar Sintetizar",
+      "es_piloto": true
+    },
+    {
+      "numero": 44,
+      "clave": "A",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 45,
+      "clave": "C",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": true
+    },
+    {
+      "numero": 46,
+      "clave": "D",
+      "habilidad": "Interpretar Inferir",
+      "es_piloto": false
+    },
+    {
+      "numero": 47,
+      "clave": "C",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 48,
+      "clave": "A",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": true
+    },
+    {
+      "numero": 49,
+      "clave": "D",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 50,
+      "clave": "C",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 51,
+      "clave": "B",
+      "habilidad": "Interpretar Sintetizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 52,
+      "clave": "D",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": true
+    },
+    {
+      "numero": 53,
+      "clave": "A",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 54,
+      "clave": "B",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 55,
+      "clave": "C",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 56,
+      "clave": "C",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 57,
+      "clave": "A",
+      "habilidad": "Interpretar Relacionar",
+      "es_piloto": false
+    },
+    {
+      "numero": 58,
+      "clave": "B",
+      "habilidad": "Interpretar Inferir",
+      "es_piloto": false
+    },
+    {
+      "numero": 59,
+      "clave": "C",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 60,
+      "clave": "C",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 61,
+      "clave": "D",
+      "habilidad": "Localizar",
+      "es_piloto": false
+    },
+    {
+      "numero": 62,
+      "clave": "C",
+      "habilidad": "Interpretar",
+      "es_piloto": false
+    },
+    {
+      "numero": 63,
+      "clave": "C",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    },
+    {
+      "numero": 64,
+      "clave": "D",
+      "habilidad": "Interpretar",
+      "es_piloto": false
+    },
+    {
+      "numero": 65,
+      "clave": "A",
+      "habilidad": "Evaluar",
+      "es_piloto": false
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { supabase } from './supabaseClient';
-import ensayoData from '../data/ensayoDiagnostico2026.json';
+import ensayoDiagnostico from '../data/ensayoDiagnostico2026.json';
+import ensayo3 from '../data/ensayo3.json';
 import tablaDemre from '../data/tablaDemre.json';
 
 const STORAGE_KEY = 'profekarlos_intentos_ensayos';
@@ -7,21 +8,29 @@ const STORAGE_KEY = 'profekarlos_intentos_ensayos';
 // Admin access PIN (configurable desde variables de entorno)
 export const ADMIN_PIN = import.meta.env.VITE_ADMIN_PIN || 'Kapacord#2026';
 
+export const ENSAYOS = {
+  [ensayoDiagnostico.id]: ensayoDiagnostico,
+  [ensayo3.id]: ensayo3
+};
+
+export function obtenerEnsayoData(ensayoId) {
+  return ENSAYOS[ensayoId] || ENSAYOS[ensayo3.id];
+}
+
 /**
  * Califica un ensayo completo del estudiante
  */
-export function calificarEnsayo({ nombre, apellido, email, respuestas }) {
+export function calificarEnsayo({ ensayoId, nombre, apellido, email, respuestas }) {
+  const ensayoData = obtenerEnsayoData(ensayoId);
+  
   let correctasValidas = 0;
   let incorrectasValidas = 0;
   let omitidasValidas = 0;
 
   const desglosePreguntas = [];
 
-  const habilidadesStats = {
-    Localizar: { total: 0, correctas: 0 },
-    Interpretar: { total: 0, correctas: 0 },
-    Evaluar: { total: 0, correctas: 0 }
-  };
+  // Se calculará dinámicamente según las habilidades presentes en la pauta
+  const habilidadesStats = {};
 
   ensayoData.preguntas.forEach((p) => {
     const qNum = p.numero;
@@ -159,7 +168,7 @@ export async function obtenerTodosLosIntentos() {
           id: d.id,
           fecha: d.fecha,
           ensayoId: d.ensayo_id,
-          ensayoTitulo: ensayoData.titulo,
+          ensayoTitulo: obtenerEnsayoData(d.ensayo_id)?.titulo || 'Ensayo Desconocido',
           nombreEstudiante: d.nombre_estudiante,
           emailEstudiante: d.email_estudiante,
           puntajePaes: d.puntaje_paes,

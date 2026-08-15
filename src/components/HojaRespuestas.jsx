@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, User, Mail, AlertCircle, ArrowLeft, Send } from 'lucide-react';
-import ensayoData from '../data/ensayoDiagnostico2026.json';
+import { obtenerEnsayoData } from '../lib/ensayoService';
 
-export default function HojaRespuestas({ onFinalizar, onVolver }) {
+export default function HojaRespuestas({ ensayoId, onFinalizar, onVolver }) {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
@@ -10,6 +10,7 @@ export default function HojaRespuestas({ onFinalizar, onVolver }) {
   const [errorSubmit, setErrorSubmit] = useState('');
   const [confirmModal, setConfirmModal] = useState(false);
 
+  const ensayoData = obtenerEnsayoData(ensayoId);
   const totalPreguntas = ensayoData.total_preguntas || 65;
   const respondidasCount = Object.keys(respuestas).length;
 
