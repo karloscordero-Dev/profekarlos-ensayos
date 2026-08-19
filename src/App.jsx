@@ -14,7 +14,7 @@ function EnsayoFlujo() {
 
   const handleFinalizar = (datosAlumno) => {
     // Pasar ensayoId que viene de la URL (diagnostico o ensayo_3)
-    const id = ensayoId === 'diagnostico' ? 'ensayo_diagnostico_2026' : ensayoId;
+    const id = ensayoId === 'diagnostico' ? 'diag-2026' : ensayoId;
     const intento = calificarEnsayo({ ...datosAlumno, ensayoId: id });
     setUltimoIntento(intento);
   };
@@ -30,7 +30,7 @@ function EnsayoFlujo() {
   }
 
   // Mapeo simple para obtener el id real o fallback
-  const idReal = ensayoId === 'diagnostico' ? 'ensayo_diagnostico_2026' : ensayoId;
+  const idReal = ensayoId === 'diagnostico' ? 'diag-2026' : ensayoId;
 
   return (
     <HojaRespuestas 
