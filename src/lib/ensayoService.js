@@ -1,9 +1,20 @@
-import { supabase } from './supabaseClient';
+import { db, isFirebaseConfigured } from './firebaseClient';
+import { 
+  collection, 
+  doc, 
+  setDoc, 
+  getDocs, 
+  deleteDoc, 
+  query, 
+  orderBy,
+  serverTimestamp 
+} from 'firebase/firestore';
 import ensayoDiagnostico from '../data/ensayoDiagnostico2026.json';
 import ensayo3 from '../data/ensayo3.json';
 import tablaDemre from '../data/tablaDemre.json';
 
 const STORAGE_KEY = 'profekarlos_intentos_ensayos';
+const COLLECTION_NAME = 'intentos_ensayos';
 
 // Admin access PIN (configurable desde variables de entorno)
 export const ADMIN_PIN = import.meta.env.VITE_ADMIN_PIN || 'Kapacord#2026';
@@ -96,11 +107,11 @@ export function calificarEnsayo({ ensayoId, nombre, apellido, email, respuestas 
     respuestasOriginales: respuestas
   };
 
-  // Guardar intento en LocalStorage
+  // Guardar intento en LocalStorage para redundancia
   guardarEnLocalStorage(nuevoIntento);
 
-  // Intentar guardar en Supabase si está disponible
-  guardarEnSupabase(nuevoIntento);
+  // Guardar en Firebase Cloud Firestore
+  guardarEnFirestore(nuevoIntento);
 
   return nuevoIntento;
 }
@@ -119,33 +130,23 @@ function guardarEnLocalStorage(intento) {
 }
 
 /**
- * Guarda el intento en la tabla 'intentos_ensayos' de Supabase (asíncrono)
+ * Guarda el intento en Cloud Firestore (asíncrono)
  */
-async function guardarEnSupabase(intento) {
+async function guardarEnFirestore(intento) {
   try {
-    if (!import.meta.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL.includes('placeholder')) {
+    if (!isFirebaseConfigured) {
+      console.warn('Firebase no está configurado o faltan credenciales.');
       return;
     }
-    const { error } = await supabase.from('intentos_ensayos').insert([
-      {
-        id: intento.id,
-        fecha: intento.fecha,
-        ensayo_id: intento.ensayoId,
-        nombre_estudiante: intento.nombreEstudiante,
-        email_estudiante: intento.emailEstudiante,
-        puntaje_paes: intento.puntajePaes,
-        correctas: intento.correctas,
-        incorrectas: intento.incorrectas,
-        omitidas: intento.omitidas,
-        habilidades: intento.habilidadesResumen,
-        desglose: intento.desglosePreguntas
-      }
-    ]);
-    if (error) {
-      console.warn('Advertencia guardando en Supabase:', error.message);
-    }
+
+    const docRef = doc(db, COLLECTION_NAME, intento.id);
+    await setDoc(docRef, {
+      ...intento,
+      createdAt: serverTimestamp()
+    });
+    console.info(`[Firestore] Intento ${intento.id} guardado exitosamente.`);
   } catch (e) {
-    console.warn('Supabase no disponible:', e);
+    console.warn('Error guardando en Cloud Firestore:', e);
   }
 }
 
@@ -156,29 +157,35 @@ export async function obtenerTodosLosIntentos() {
   const local = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   
   try {
-    if (import.meta.env.VITE_SUPABASE_URL && !import.meta.env.VITE_SUPABASE_URL.includes('placeholder')) {
-      const { data, error } = await supabase
-        .from('intentos_ensayos')
-        .select('*')
-        .order('fecha', { ascending: false });
+    if (isFirebaseConfigured) {
+      const q = query(
+        collection(db, COLLECTION_NAME),
+        orderBy('fecha', 'desc')
+      );
       
-      if (!error && data && data.length > 0) {
-        // Mapear campos de Supabase a la estructura interna
-        const remotos = data.map((d) => ({
-          id: d.id,
-          fecha: d.fecha,
-          ensayoId: d.ensayo_id,
-          ensayoTitulo: obtenerEnsayoData(d.ensayo_id)?.titulo || 'Ensayo Desconocido',
-          nombreEstudiante: d.nombre_estudiante,
-          emailEstudiante: d.email_estudiante,
-          puntajePaes: d.puntaje_paes,
-          correctas: d.correctas,
-          incorrectas: d.incorrectas,
-          omitidas: d.omitidas,
-          habilidadesResumen: d.habilidades,
-          desglosePreguntas: d.desglose
-        }));
+      const querySnapshot = await getDocs(q);
+      const remotos = [];
 
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        remotos.push({
+          id: docSnap.id,
+          fecha: data.fecha,
+          ensayoId: data.ensayoId,
+          ensayoTitulo: data.ensayoTitulo || obtenerEnsayoData(data.ensayoId)?.titulo || 'Ensayo Desconocido',
+          nombreEstudiante: data.nombreEstudiante,
+          emailEstudiante: data.emailEstudiante,
+          puntajePaes: data.puntajePaes,
+          correctas: data.correctas,
+          incorrectas: data.incorrectas,
+          omitidas: data.omitidas,
+          habilidadesResumen: data.habilidadesResumen,
+          desglosePreguntas: data.desglosePreguntas,
+          respuestasOriginales: data.respuestasOriginales
+        });
+      });
+
+      if (remotos.length > 0) {
         // Combinar evitando duplicados por ID
         const map = new Map();
         [...remotos, ...local].forEach((item) => map.set(item.id, item));
@@ -193,7 +200,7 @@ export async function obtenerTodosLosIntentos() {
 }
 
 /**
- * Elimina un intento por ID tanto en local como en Supabase
+ * Elimina un intento por ID tanto en local como en Firestore
  */
 export async function eliminarIntento(id) {
   // Eliminar localmente
@@ -205,15 +212,14 @@ export async function eliminarIntento(id) {
     console.error('Error eliminando en localStorage:', err);
   }
 
-  // Eliminar en Supabase
+  // Eliminar en Firestore
   try {
-    if (import.meta.env.VITE_SUPABASE_URL && !import.meta.env.VITE_SUPABASE_URL.includes('placeholder')) {
-      const { error } = await supabase.from('intentos_ensayos').delete().match({ id });
-      if (error) {
-        console.warn('Error eliminando en Supabase:', error.message);
-      }
+    if (isFirebaseConfigured) {
+      const docRef = doc(db, COLLECTION_NAME, id);
+      await deleteDoc(docRef);
+      console.info(`[Firestore] Intento ${id} eliminado exitosamente.`);
     }
   } catch (err) {
-    console.warn('Supabase no disponible para eliminar:', err);
+    console.warn('Error eliminando en Cloud Firestore:', err);
   }
 }
