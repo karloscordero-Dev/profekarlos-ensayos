@@ -186,9 +186,15 @@ export async function obtenerTodosLosIntentos() {
       });
 
       if (remotos.length > 0) {
-        // Combinar evitando duplicados por ID
+        // Combinar evitando duplicados por ID y normalizar títulos
         const map = new Map();
-        [...remotos, ...local].forEach((item) => map.set(item.id, item));
+        [...remotos, ...local].forEach((item) => {
+          const ensayoNorm = obtenerEnsayoData(item.ensayoId);
+          map.set(item.id, {
+            ...item,
+            ensayoTitulo: ensayoNorm?.titulo || 'Ensayo Desconocido'
+          });
+        });
         return Array.from(map.values()).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
       }
     }
@@ -196,7 +202,10 @@ export async function obtenerTodosLosIntentos() {
     console.warn('Usando respaldo local para obtener intentos:', err);
   }
 
-  return local;
+  return local.map(item => ({
+    ...item,
+    ensayoTitulo: obtenerEnsayoData(item.ensayoId)?.titulo || 'Ensayo Desconocido'
+  }));
 }
 
 /**
