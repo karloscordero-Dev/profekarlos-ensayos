@@ -25,7 +25,9 @@ export default function AdminPanel({ onVolver }) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (pinInput === ADMIN_PIN) {
+    const cleanInput = pinInput.trim();
+    const cleanPin = (ADMIN_PIN || 'Kapacord#2026').trim();
+    if (cleanInput === cleanPin) {
       setAutenticado(true);
       sessionStorage.setItem('profekarlos_admin_auth', 'true');
       setPinError(false);
