@@ -10,7 +10,8 @@ export default function PortalInicio() {
       {/* Navbar Simple */}
       <nav className="border-b border-[#1a1f2e] bg-[#0c0f17]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <img src="/logo-profekarlos.png" alt="Logo ProfeKarlos" className="w-8 h-8 rounded-lg object-contain" />
             <span className="font-serif font-bold text-xl text-white tracking-wide">ProfeKarlos</span>
             <span className="text-emerald-400 font-semibold text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">Ensayos</span>
           </div>
@@ -49,7 +50,7 @@ export default function PortalInicio() {
                 <BookOpen className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">EN CURSO</div>
+                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">FINES DE JULIO</div>
                 <h3 className="text-xl font-bold text-white mb-2">Ensayo Diagnóstico 2026</h3>
                 <p className="text-sm text-slate-400">
                   Evaluación inicial de 65 preguntas. Mide tu base antes de comenzar el intensivo.
@@ -74,7 +75,7 @@ export default function PortalInicio() {
                 <Award className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">NUEVO</div>
+                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">FINES DE AGOSTO</div>
                 <h3 className="text-xl font-bold text-white mb-2">Ensayo 3</h3>
                 <p className="text-sm text-slate-400">
                   Evaluación de Competencia Lectora. Incluye subdivisión en habilidad de Interpretar.
