@@ -19,3 +19,32 @@ body {
 .text-gradient-gold {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-gold to-yellow-200;
 }
+
+/* Optimización para generación instantánea de PDF e impresión */
+@media print {
+  @page {
+    margin: 1.2cm;
+    size: auto;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Desactivar efectos pesados que ralentizan la generación del PDF */
+  *, *:before, *:after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}

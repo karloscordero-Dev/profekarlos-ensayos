@@ -31,9 +31,20 @@ export default function ReporteResultado({ intento, onReiniciar, onVolver }) {
     return '¡Sigue practicando! Revisa el desglose por habilidades para enfocar tu estudio.';
   };
 
+  const handleImprimir = () => {
+    // Si hay un filtro aplicado que oculta preguntas, restablecer para que el reporte impreso esté completo
+    if (filtro !== 'todos') {
+      setFiltro('todos');
+    }
+    // Timeout para permitir que el navegador actualice el estado antes de llamar al diálogo de impresión
+    setTimeout(() => {
+      window.print();
+    }, 50);
+  };
+
   return (
-    <div className="min-h-screen bg-[#07090e] text-slate-100 py-8 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500/30">
-      <div className="max-w-4xl mx-auto space-y-8 print:py-0 print:max-w-none">
+    <div className="min-h-screen bg-[#07090e] text-slate-100 py-8 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500/30 print:bg-white print:text-slate-900 print:py-2 print:px-2">
+      <div className="max-w-4xl mx-auto space-y-8 print:py-0 print:space-y-4 print:max-w-none">
         
         {/* Navigation Top */}
         <div className="flex items-center justify-between print:hidden">
@@ -45,14 +56,14 @@ export default function ReporteResultado({ intento, onReiniciar, onVolver }) {
           </button>
           <div className="flex gap-2">
             <button
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0f131d] hover:bg-[#161c2b] text-slate-200 text-xs font-medium border border-[#1e2538] transition-colors shadow-sm"
+              onClick={handleImprimir}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0f131d] hover:bg-[#161c2b] text-slate-200 text-xs font-medium border border-[#1e2538] transition-colors shadow-sm cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" /> Imprimir / Guardar PDF
             </button>
             <button
               onClick={onReiniciar}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-medium border border-emerald-500/30 transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-medium border border-emerald-500/30 transition-colors shadow-sm cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" /> Rendir de Nuevo
             </button>
@@ -211,24 +222,24 @@ export default function ReporteResultado({ intento, onReiniciar, onVolver }) {
               }
 
               return (
-                <div key={p.numero} className={`border rounded-xl p-3 space-y-2 ${cardStyle}`}>
+                <div key={p.numero} className={`border rounded-xl p-3 space-y-2 ${cardStyle} break-inside-avoid print:bg-slate-50 print:border-slate-300 print:p-2`}>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-white">N° {p.numero}</span>
+                    <span className="text-xs font-mono font-bold text-white print:text-slate-900">N° {p.numero}</span>
                     {icon}
                   </div>
                   <div className="text-xs space-y-1">
-                    <div className="flex justify-between text-slate-400">
+                    <div className="flex justify-between text-slate-400 print:text-slate-600">
                       <span>Tu respuesta:</span>
-                      <strong className={`font-mono ${esCorrecta ? 'text-emerald-400' : omitida ? 'text-amber-400' : 'text-rose-400'}`}>
+                      <strong className={`font-mono ${esCorrecta ? 'text-emerald-400 print:text-emerald-700' : omitida ? 'text-amber-400 print:text-amber-700' : 'text-rose-400 print:text-rose-700'}`}>
                         {p.opcionElegida || 'Omitida'}
                       </strong>
                     </div>
-                    <div className="flex justify-between text-slate-400">
+                    <div className="flex justify-between text-slate-400 print:text-slate-600">
                       <span>Correcta:</span>
-                      <strong className="font-mono text-emerald-400">{p.claveCorrecta}</strong>
+                      <strong className="font-mono text-emerald-400 print:text-emerald-700">{p.claveCorrecta}</strong>
                     </div>
                   </div>
-                  <div className="text-[10px] text-slate-500 pt-1 border-t border-slate-800/40 truncate">
+                  <div className="text-[10px] text-slate-500 print:text-slate-500 pt-1 border-t border-slate-800/40 print:border-slate-200 truncate">
                     {p.habilidad}
                   </div>
                 </div>
