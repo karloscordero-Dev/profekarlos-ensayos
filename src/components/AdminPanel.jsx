@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Lock, Users, Award, Search, Eye, ArrowLeft, RefreshCw, Trash2, BarChart3, ChevronDown } from 'lucide-react';
-import { ADMIN_PIN, obtenerTodosLosIntentos, eliminarIntento } from '../lib/ensayoService';
+import { ADMIN_PIN, obtenerTodosLosIntentos, eliminarIntento, ENSAYOS } from '../lib/ensayoService';
 import ReporteResultado from './ReporteResultado';
 
 export default function AdminPanel({ onVolver }) {
@@ -58,7 +58,11 @@ export default function AdminPanel({ onVolver }) {
     }
   };
 
-  const ensayosDisponibles = useMemo(() => [...new Set(intentos.map(i => i.ensayoTitulo || 'Ensayo Sin Título'))], [intentos]);
+  const ensayosDisponibles = useMemo(() => {
+    const titulosConfigurados = Object.values(ENSAYOS).map(e => e.titulo);
+    const titulosIntentos = intentos.map(i => i.ensayoTitulo).filter(Boolean);
+    return [...new Set([...titulosConfigurados, ...titulosIntentos])];
+  }, [intentos]);
   
   useEffect(() => {
     if (ensayosDisponibles.length > 0 && !ensayoActivo) {

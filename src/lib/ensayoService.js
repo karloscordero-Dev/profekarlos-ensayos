@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore';
 import ensayoDiagnostico from '../data/ensayoDiagnostico2026.json';
 import ensayo3 from '../data/ensayo3.json';
+import ensayo4 from '../data/ensayo4.json';
 import tablaDemre from '../data/tablaDemre.json';
 
 const STORAGE_KEY = 'profekarlos_intentos_ensayos';
@@ -21,11 +22,12 @@ export const ADMIN_PIN = import.meta.env.VITE_ADMIN_PIN || 'Kapacord#2026';
 
 export const ENSAYOS = {
   [ensayoDiagnostico.id]: ensayoDiagnostico,
-  [ensayo3.id]: ensayo3
+  [ensayo3.id]: ensayo3,
+  [ensayo4.id]: ensayo4
 };
 
 export function obtenerEnsayoData(ensayoId) {
-  return ENSAYOS[ensayoId] || ENSAYOS[ensayo3.id];
+  return ENSAYOS[ensayoId] || ENSAYOS[ensayo4.id] || ENSAYOS[ensayo3.id];
 }
 
 /**
