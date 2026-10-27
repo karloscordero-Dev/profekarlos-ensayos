@@ -125,7 +125,7 @@ export default function PortalInicio() {
                 <Sparkles className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">NUEVO</div>
+                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">FINES DE OCTUBRE</div>
                 <h3 className="text-xl font-bold text-white mb-2">Ensayo 5</h3>
                 <p className="text-sm text-slate-400">
                   Evaluación de Competencia Lectora. Incluye subdivisión completa de habilidades.

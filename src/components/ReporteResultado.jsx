@@ -203,6 +203,7 @@ export default function ReporteResultado({ intento, onReiniciar, onVolver }) {
               const esPiloto = p.esPiloto;
               const esCorrecta = p.esCorrecta;
               const omitida = !p.opcionElegida;
+              const acerto = p.opcionElegida === p.claveCorrecta;
 
               let cardStyle = 'border-[#1e2538] bg-[#121622]';
               let icon = <HelpCircle className="w-4 h-4 text-slate-500" />;
@@ -230,7 +231,7 @@ export default function ReporteResultado({ intento, onReiniciar, onVolver }) {
                   <div className="text-xs space-y-1">
                     <div className="flex justify-between text-slate-400 print:text-slate-600">
                       <span>Tu respuesta:</span>
-                      <strong className={`font-mono ${esCorrecta ? 'text-emerald-400 print:text-emerald-700' : omitida ? 'text-amber-400 print:text-amber-700' : 'text-rose-400 print:text-rose-700'}`}>
+                      <strong className={`font-mono ${acerto ? 'text-emerald-400 print:text-emerald-700' : omitida ? 'text-amber-400 print:text-amber-700' : 'text-rose-400 print:text-rose-700'}`}>
                         {p.opcionElegida || 'Omitida'}
                       </strong>
                     </div>

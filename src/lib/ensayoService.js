@@ -50,21 +50,24 @@ export function calificarEnsayo({ ensayoId, nombre, apellido, email, respuestas 
   ensayoData.preguntas.forEach((p) => {
     const qNum = p.numero;
     const opcionElegida = respuestas[qNum] || null; // 'A', 'B', 'C', 'D' o null
-    const esCorrecta = !p.es_piloto && opcionElegida === p.clave;
+    const acertoClave = opcionElegida === p.clave;
+    const esCorrecta = !p.es_piloto && acertoClave;
+
+    // Habilidad tracking sobre las 65 preguntas del ensayo para coincidir con la tabla total de habilidades
+    const hab = p.habilidad || 'Interpretar';
+    if (!habilidadesStats[hab]) {
+      habilidadesStats[hab] = { total: 0, correctas: 0 };
+    }
+    habilidadesStats[hab].total += 1;
+    if (acertoClave) {
+      habilidadesStats[hab].correctas += 1;
+    }
 
     if (!p.es_piloto) {
-      // Habilidad tracking
-      const hab = p.habilidad || 'Interpretar';
-      if (!habilidadesStats[hab]) {
-        habilidadesStats[hab] = { total: 0, correctas: 0 };
-      }
-      habilidadesStats[hab].total += 1;
-
       if (!opcionElegida) {
         omitidasValidas++;
       } else if (esCorrecta) {
         correctasValidas++;
-        habilidadesStats[hab].correctas += 1;
       } else {
         incorrectasValidas++;
       }
@@ -155,6 +158,82 @@ async function guardarEnFirestore(intento) {
 }
 
 /**
+ * Recalcula habilidadesResumen y desglosePreguntas sobre las 65 preguntas de la pauta vigente
+ */
+function normalizarIntentoConPauta(item) {
+  const ensayoNorm = ENSAYOS[item.ensayoId] || obtenerEnsayoData(item.ensayoId);
+  if (!ensayoNorm || !ensayoNorm.preguntas) {
+    return {
+      ...item,
+      ensayoTitulo: ensayoNorm?.titulo || item.ensayoTitulo || 'Ensayo Desconocido'
+    };
+  }
+
+  // Obtener respuestas del intento
+  const respuestas = item.respuestasOriginales || {};
+  const tieneRespuestas = Object.keys(respuestas).length > 0 || Array.isArray(item.desglosePreguntas);
+
+  if (!tieneRespuestas) {
+    return {
+      ...item,
+      ensayoTitulo: ensayoNorm.titulo
+    };
+  }
+
+  const mapaDesglose = {};
+  if (Array.isArray(item.desglosePreguntas)) {
+    item.desglosePreguntas.forEach((d) => {
+      mapaDesglose[d.numero] = d.opcionElegida;
+    });
+  }
+
+  const habilidadesStats = {};
+  const desgloseActualizado = [];
+
+  ensayoNorm.preguntas.forEach((p) => {
+    const qNum = p.numero;
+    const opcionElegida = respuestas[qNum] ?? respuestas[String(qNum)] ?? mapaDesglose[qNum] ?? null;
+    const acertoClave = opcionElegida === p.clave;
+    const esCorrecta = !p.es_piloto && acertoClave;
+
+    const hab = p.habilidad || 'Interpretar';
+    if (!habilidadesStats[hab]) {
+      habilidadesStats[hab] = { total: 0, correctas: 0 };
+    }
+    habilidadesStats[hab].total += 1;
+    if (acertoClave) {
+      habilidadesStats[hab].correctas += 1;
+    }
+
+    desgloseActualizado.push({
+      numero: qNum,
+      opcionElegida,
+      claveCorrecta: p.clave,
+      habilidad: p.habilidad,
+      esPiloto: p.es_piloto,
+      esCorrecta: p.es_piloto ? null : esCorrecta
+    });
+  });
+
+  const habilidadesResumen = {};
+  Object.keys(habilidadesStats).forEach((hab) => {
+    const stat = habilidadesStats[hab];
+    habilidadesResumen[hab] = {
+      total: stat.total,
+      correctas: stat.correctas,
+      porcentaje: stat.total > 0 ? Math.round((stat.correctas / stat.total) * 100) : 0
+    };
+  });
+
+  return {
+    ...item,
+    ensayoTitulo: ensayoNorm.titulo,
+    habilidadesResumen,
+    desglosePreguntas: desgloseActualizado
+  };
+}
+
+/**
  * Obtener todos los intentos para el Panel Admin
  */
 export async function obtenerTodosLosIntentos() {
@@ -190,14 +269,10 @@ export async function obtenerTodosLosIntentos() {
       });
 
       if (remotos.length > 0) {
-        // Combinar evitando duplicados por ID y normalizar títulos
+        // Combinar evitando duplicados por ID y normalizar títulos y habilidades sobre las 65 preguntas
         const map = new Map();
         [...remotos, ...local].forEach((item) => {
-          const ensayoNorm = obtenerEnsayoData(item.ensayoId);
-          map.set(item.id, {
-            ...item,
-            ensayoTitulo: ensayoNorm?.titulo || 'Ensayo Desconocido'
-          });
+          map.set(item.id, normalizarIntentoConPauta(item));
         });
         return Array.from(map.values()).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
       }
@@ -206,10 +281,7 @@ export async function obtenerTodosLosIntentos() {
     console.warn('Usando respaldo local para obtener intentos:', err);
   }
 
-  return local.map(item => ({
-    ...item,
-    ensayoTitulo: obtenerEnsayoData(item.ensayoId)?.titulo || 'Ensayo Desconocido'
-  }));
+  return local.map((item) => normalizarIntentoConPauta(item));
 }
 
 /**
