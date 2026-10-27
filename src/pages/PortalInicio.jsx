@@ -97,10 +97,10 @@ export default function PortalInicio() {
           <div className="bg-[#0f131d]/90 border border-[#1e2538] rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-500/50 hover:bg-[#141a27] transition-all group shadow-xl">
             <div className="space-y-4">
               <div className="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center border border-emerald-500/20 group-hover:scale-110 transition-transform">
-                <Sparkles className="w-6 h-6" />
+                <Award className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">NUEVO</div>
+                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">FINES DE SEPTIEMBRE</div>
                 <h3 className="text-xl font-bold text-white mb-2">Ensayo 4</h3>
                 <p className="text-sm text-slate-400">
                   Evaluación de Competencia Lectora. Incluye subdivisión completa de habilidades.
@@ -111,6 +111,31 @@ export default function PortalInicio() {
             <div className="pt-6 mt-6 border-t border-[#1e2538]">
               <button 
                 onClick={() => navigate('/ensayo/ensayo_4')}
+                className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20"
+              >
+                Comenzar Ensayo <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Tarjeta Ensayo 5 */}
+          <div className="bg-[#0f131d]/90 border border-[#1e2538] rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-500/50 hover:bg-[#141a27] transition-all group shadow-xl">
+            <div className="space-y-4">
+              <div className="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center border border-emerald-500/20 group-hover:scale-110 transition-transform">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="text-xs font-bold text-emerald-400 mb-1 font-mono">NUEVO</div>
+                <h3 className="text-xl font-bold text-white mb-2">Ensayo 5</h3>
+                <p className="text-sm text-slate-400">
+                  Evaluación de Competencia Lectora. Incluye subdivisión completa de habilidades.
+                </p>
+              </div>
+            </div>
+            
+            <div className="pt-6 mt-6 border-t border-[#1e2538]">
+              <button 
+                onClick={() => navigate('/ensayo/ensayo_5')}
                 className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20"
               >
                 Comenzar Ensayo <ArrowRight className="w-4 h-4" />
