@@ -25,7 +25,7 @@
     {
       "numero": 4,
       "clave": "C",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -73,7 +73,7 @@
     {
       "numero": 12,
       "clave": "C",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -91,7 +91,7 @@
     {
       "numero": 15,
       "clave": "A",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -115,7 +115,7 @@
     {
       "numero": 19,
       "clave": "C",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -145,7 +145,7 @@
     {
       "numero": 24,
       "clave": "C",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -223,13 +223,13 @@
     {
       "numero": 37,
       "clave": "D",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
       "numero": 38,
       "clave": "B",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -247,7 +247,7 @@
     {
       "numero": 41,
       "clave": "B",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -265,7 +265,7 @@
     {
       "numero": 44,
       "clave": "D",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -313,7 +313,7 @@
     {
       "numero": 52,
       "clave": "A",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -325,7 +325,7 @@
     {
       "numero": 54,
       "clave": "B",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
@@ -355,13 +355,13 @@
     {
       "numero": 59,
       "clave": "D",
-      "habilidad": "Interpretar Función",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
       "numero": 60,
       "clave": "A",
-      "habilidad": "Interpretar Relacionar",
+      "habilidad": "Interpretar Relación-Función",
       "es_piloto": false
     },
     {
